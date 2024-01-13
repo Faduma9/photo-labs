@@ -58,10 +58,9 @@ const sampleDataForPhotoList = [
   },
 ];
 
-const PhotoList = ({ photoData }) => {  
-  console.log(photoData);
-  return (
-    <ul className="photo-list">
+const PhotoList = ({ photoData, toggleFavorite, favorites }) => {
+    return (
+      <ul className="photo-list">
       {photoData.map(photo => (
         <li key={photo.id} className="photo-list__item">
           <PhotoListItem
@@ -70,6 +69,8 @@ const PhotoList = ({ photoData }) => {
             imageSource={photo.urls.regular}
             username={photo.user.username}
             profile={photo.user.profile}
+            isFavorited={favorites.has(photo.id)}
+            onToggleFavorite={() => toggleFavorite(photo.id)}
           />
         </li>
       ))}
@@ -79,4 +80,3 @@ const PhotoList = ({ photoData }) => {
 
 
 export default PhotoList;
-
