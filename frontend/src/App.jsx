@@ -25,10 +25,15 @@ const sampleDataForPhotoListItem = {
 
 
 const App = () => {
+  const photos = new Array(3).fill(sampleDataForPhotoListItem);
   return (
     <div className="App">
-      <PhotoListItem  photo ={sampleDataForPhotoListItem}/>
-      
+      <div className="photo-list">
+        {photos.map((photo, index) => (
+          <PhotoListItem key={photo.id + index} photo={photo} />
+        ))}
+      </div>
+
       { /*FavBadge/> */}
       {/*FavIcon/> */}
       { /* PhotoFavButton/>*/}
