@@ -1,20 +1,17 @@
 import React from 'react';
-import TopNavigationBar from '../components/TopNavigationBar';
-
-import PhotoList from '../components/PhotoList';
 
 import '../styles/HomeRoute.scss';
+import TopNavigationBar from '../components/TopNavigationBar';
+import PhotoList from '../components/PhotoList';
 
-
-const HomeRoute = (favCount) => {
+const HomeRoute = ({ favoriteCount, photoData, topicData }) => {
   return (
     <div className="home-route">
-      <TopNavigationBar favCount={favCount} />
-      <PhotoList/>
-    
+      <TopNavigationBar favoriteCount={favoriteCount} topicData={topicData} />
+      <PhotoList photoData={photoData} />  
     </div>
-    
   );
 };
+
 
 export default HomeRoute;

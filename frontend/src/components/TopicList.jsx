@@ -1,3 +1,4 @@
+
 import React from "react";
 import TopicListItem from "./TopicListItem";
 
@@ -21,10 +22,10 @@ const sampleDataForTopicList = [
   },
 ];
 
-const TopicList = () => {
+const TopicList = ({ topicData }) => {
   return (
     <div className="top-nav-bar__topic-list">
-      {sampleDataForTopicList.map(topic => (
+      {topicData.map(topic => (
         <TopicListItem key={topic.id} label={topic.title} />
       ))}
     </div>
