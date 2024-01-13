@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PhotoListItem from './components/PhotoListItem';
+// import PhotoListItem from './components/PhotoListItem';
 import './App.scss';
 import FavBadge from './components/FavBadge';
 import FavIcon from './components/FavIcon';
@@ -11,33 +11,31 @@ import TopicListItem from './components/TopicListItem';
 import TopNavigation from './components/TopNavigationBar';
 // Note: Rendering a single component to build components in isolation
 
-const sampleDataForPhotoListItem = {
-  id: "1",
-  location: {
-    city: "Montreal",
-    country: "Canada",
-  },
-  imageSource: `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
-  username: "Joe Example",
-  profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-};
+// const sampleDataForPhotoListItem = {
+//   id: "1",
+//   location: {
+//     city: "Montreal",
+//     country: "Canada",
+//   },
+//   imageSource: `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
+//   username: "Joe Example",
+//   profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
+// };
 
 
 
 const App = () => {
-  const photos = new Array(3).fill(sampleDataForPhotoListItem);
+
+   //const photos = new Array(3).fill(sampleDataForPhotoListItem);
+  //key={photo.id + index} photo={photo} 
   return (
     <div className="App">
-      <div className="photo-list">
-        {photos.map((photo, index) => (
-          <PhotoListItem key={photo.id + index} photo={photo} />
-        ))}
-      </div>
+  
+     {/*PhotoListItem /> */} 
+        {/*<FavBadge/> */} 
+      {/*FavIcon/> */}
+      {/*PhotoFavButton/> */}
 
-      <FavBadge/>
-      <FavIcon/>
-      <PhotoFavButton/>
-      
       <PhotoList/> 
       {/*TopicList/>*/}     
        {/*TopicListItem/>*/}

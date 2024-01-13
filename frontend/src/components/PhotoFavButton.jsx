@@ -8,7 +8,7 @@ function PhotoFavButton() {
   const [isLiked, setIsLiked] = useState(false);
 
   const pressLike = () => {
-    setIsLiked(!isLiked);
+    setIsLiked(prevIsLiked => !prevIsLiked);
   };
   return (
     <div className="photo-list__fav-icon" onClick={pressLike}>
