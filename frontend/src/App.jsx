@@ -2,6 +2,7 @@ import React from 'react';
 
 //import PhotoListItem from './components/PhotoListItem';
 import './App.scss';
+import HomeRoute from 'routes/HomeRoute';
 import FavBadge from './components/FavBadge';
 import FavIcon from './components/FavIcon';
 import PhotoFavButton from './components/PhotoFavButton';
@@ -31,9 +32,9 @@ const App = () => {
   //key={photo.id + index} photo={photo} 
   
     <div className="App">
-       <TopNavigationBar favoriteCount={favCount} />
-      {/*<TopicList/>*/} 
-     <PhotoList/> 
+             <HomeRoute favCount={favCount} />
+
+    
      
           {/*PhotoListItem /> */} 
         {/*<FavBadge/> */} 
@@ -42,7 +43,7 @@ const App = () => {
       
        
        {/*TopicListItem/>*/}
-     
+
     </div>
   
 );

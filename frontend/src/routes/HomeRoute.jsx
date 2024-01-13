@@ -1,12 +1,19 @@
 import React from 'react';
+import TopNavigationBar from '../components/TopNavigationBar';
+
+import PhotoList from '../components/PhotoList';
 
 import '../styles/HomeRoute.scss';
 
-const HomeRoute = () => {
+
+const HomeRoute = (favCount) => {
   return (
     <div className="home-route">
-      {/* Insert React */}
+      <TopNavigationBar favCount={favCount} />
+      <PhotoList/>
+    
     </div>
+    
   );
 };
 
