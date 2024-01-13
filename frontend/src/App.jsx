@@ -28,7 +28,7 @@ const App = () => {
   return (
     <div className="App">
       <PhotoListItem  photo ={sampleDataForPhotoListItem}/>
-
+this is a test
       { /*FavBadge/> */}
       {/*FavIcon/> */}
       { /* PhotoFavButton/>*/}
