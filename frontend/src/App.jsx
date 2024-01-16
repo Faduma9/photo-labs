@@ -1,40 +1,76 @@
-import React from 'react';
-
-//import PhotoListItem from './components/PhotoListItem';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
-import photos from 'mocks/photos';
-import topics from 'mocks/topics';
-import HomeRoute from 'routes/HomeRoute';
-
-// Note: Rendering a single component to build components in isolation
-//const sampleDataForPhotoListItem = {
-  //id: "1",
-  //location: {
-    //city: "Montreal",
-    //country: "Canada",
-  //},
-  //imageSource: `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
-  //username: "Joe Example",
- // profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-//};
-
+import photos from './mocks/photos';
+import topics from './mocks/topics';
+import HomeRoute from './routes/HomeRoute';
+import PhotoDetailsModal from './routes/PhotoDetailsModal'; 
 
 const App = () => {
-  const favoriteCount = 5;
+  const [modalState, setModalState] = useState({ 
+    displayModal: false, 
+    selectedPhoto: null,
+    similarPhotos: [] 
+  });
+  const [favorites, setFavorites] = useState(new Set());
+
+  const toggleFavorite = photoId => {
+    setFavorites(prevFavorites => {
+      const newFavorites = new Set(prevFavorites);
+      if (newFavorites.has(photoId)) {
+        newFavorites.delete(photoId);
+      } else {
+        newFavorites.add(photoId);
+      }
+      return newFavorites;
+    });
+  };
+
+  const setDisplayModal = (display) => {
+    setModalState({ ...modalState, displayModal: display });
+  };
+
+  const setSelectedPhoto = (photo) => {
+    const similarPhotos = photos.filter(p => 
+      p.location.city === photo.location.city && p.id !== photo.id
+    );
+    console.log("selected",photo)
+    setModalState(prevState => ({ 
+      ...prevState, 
+      selectedPhoto: photo, 
+      similarPhotos: similarPhotos
+    }));
+  };
+
+  useEffect(() => {
+    if (modalState.selectedPhoto) {
+      setDisplayModal(true);
+    }
+  }, [modalState.selectedPhoto]);
+  
 
   return (
-  //const photos = new Array(3).fill(sampleDataForPhotoListItem);
-  //key={photo.id + index} photo={photo} 
-  
     <div className="App">
-      
-      <HomeRoute favoriteCount={favoriteCount} photoData={photos} topicData={topics} />
-    
-     
-          
-     
+      <HomeRoute
+        photoData={photos}
+        topicData={topics}
+        setDisplayModal={setDisplayModal}
+        setSelectedPhoto={setSelectedPhoto}
+        favorites={favorites}
+        toggleFavorite={toggleFavorite}
+      />
+      {modalState.displayModal && (
+        <PhotoDetailsModal
+          setDisplayModal={setDisplayModal}
+          selectedPhoto={modalState.selectedPhoto}
+          similarPhotos={modalState.similarPhotos} 
+          setSelectedPhoto={setSelectedPhoto}
+          favorites={favorites}
+          toggleFavorite={toggleFavorite}
+        />
+      )}
     </div>
-  
-);
-  }
+  );
+};
+
+
 export default App;

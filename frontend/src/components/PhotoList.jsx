@@ -58,25 +58,28 @@ const sampleDataForPhotoList = [
   },
 ];
 
-const PhotoList = ({ photoData, toggleFavorite, favorites }) => {
-    return (
-      <ul className="photo-list">
-      {photoData.map(photo => (
-        <li key={photo.id} className="photo-list__item">
-          <PhotoListItem
-            id={photo.id}
-            location={photo.location}
-            imageSource={photo.urls.regular}
-            username={photo.user.username}
-            profile={photo.user.profile}
-            isFavorited={favorites.has(photo.id)}
-            onToggleFavorite={() => toggleFavorite(photo.id)}
-          />
-        </li>
-      ))}
-    </ul>
+
+const PhotoList = ({ photoData, toggleFavorite, favorites, setDisplayModal,setSelectedPhoto }) => {
+  return (
+    <ul className="photo-list">
+    {photoData.map(photo => (
+      <li key={photo.id} className="photo-list__item">
+        <PhotoListItem
+          id={photo.id}
+          location={photo.location}
+          urls={photo.urls}
+          username={photo.user.username}
+          profile={photo.user.profile}
+          similarPhotos={photo.similar_photos}
+          isFavorited={favorites.has(photo.id)}
+          onToggleFavorite={() => toggleFavorite(photo.id)}
+          setDisplayModal={setDisplayModal}
+          setSelectedPhoto={setSelectedPhoto}
+        />
+      </li>
+    ))}
+     </ul>
   );
 };
-
 
 export default PhotoList;
