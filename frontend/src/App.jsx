@@ -9,7 +9,7 @@ const App = () => {
   const [modalState, setModalState] = useState({ 
     displayModal: false, 
     selectedPhoto: null,
-    similarPhotos: [] 
+    similarPhotos: [] // Add this new state
   });
   const [favorites, setFavorites] = useState(new Set());
 
@@ -30,14 +30,14 @@ const App = () => {
   };
 
   const setSelectedPhoto = (photo) => {
-    const similarPhotos = photos.filter(p => 
-      p.location.city === photo.location.city && p.id !== photo.id
-    );
-    console.log("selected",photo)
+    
+    
+   
+   console.log("selected",photo)
     setModalState(prevState => ({ 
       ...prevState, 
       selectedPhoto: photo, 
-      similarPhotos: similarPhotos
+     similarPhotos: Object.values(photo.similarPhotos)
     }));
   };
 
@@ -62,7 +62,7 @@ const App = () => {
         <PhotoDetailsModal
           setDisplayModal={setDisplayModal}
           selectedPhoto={modalState.selectedPhoto}
-          similarPhotos={modalState.similarPhotos} 
+          similarPhotos={modalState.similarPhotos} // Pass similar photos to the modal
           setSelectedPhoto={setSelectedPhoto}
           favorites={favorites}
           toggleFavorite={toggleFavorite}
