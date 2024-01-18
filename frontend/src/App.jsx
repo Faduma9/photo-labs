@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.scss';
 import photos from './mocks/photos';
 import topics from './mocks/topics';
@@ -7,15 +7,9 @@ import PhotoDetailsModal from './routes/PhotoDetailsModal';
 import useApplicationData from './hooks/useApplicationData';
 
 const App = () => {
-  const {
-    modalState,
-    setModalState,
-    favorites,
-    toggleFavorite,
-    setDisplayModal,
-    setSelectedPhoto
-  } = useApplicationData();
-  
+  const { state, dispatch, toggleFavorite, setSelectedPhoto, setDisplayModal } = useApplicationData();
+
+  console.log(state);
   return (
     <div className="App">
       <HomeRoute
@@ -23,16 +17,16 @@ const App = () => {
         topicData={topics}
         setDisplayModal={setDisplayModal}
         setSelectedPhoto={setSelectedPhoto}
-        favorites={favorites}
+        favorites={state.favorites}
         toggleFavorite={toggleFavorite}
       />
-      {modalState.displayModal && (
+      {state.modalState.displayModal && (
         <PhotoDetailsModal
           setDisplayModal={setDisplayModal}
-          selectedPhoto={modalState.selectedPhoto}
-          similarPhotos={modalState.similarPhotos} // Pass similar photos to the modal
+          selectedPhoto={state.modalState.selectedPhoto}
+          similarPhotos={state.modalState.similarPhotos} // Pass similar photos to the modal
           setSelectedPhoto={setSelectedPhoto}
-          favorites={favorites}
+          favorites={state.favorites}
           toggleFavorite={toggleFavorite}
         />
       )}
