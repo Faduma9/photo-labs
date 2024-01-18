@@ -1,9 +1,6 @@
 import React from "react";
-
 import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
-
-
 const sampleDataForPhotoList = [
   {
     id: "1",
@@ -67,10 +64,9 @@ const PhotoList = ({ photoData, toggleFavorite, favorites, setDisplayModal,setSe
         <PhotoListItem
           id={photo.id}
           location={photo.location}
-          urls={photo.urls}
+          imageSource={photo.urls.regular}
           username={photo.user.username}
           profile={photo.user.profile}
-          similarPhotos={photo.similar_photos}
           isFavorited={favorites.has(photo.id)}
           onToggleFavorite={() => toggleFavorite(photo.id)}
           setDisplayModal={setDisplayModal}

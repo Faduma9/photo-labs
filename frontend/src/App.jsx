@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import photos from './mocks/photos';
 import topics from './mocks/topics';
@@ -11,61 +11,37 @@ const App = () => {
     selectedPhoto: null,
     similarPhotos: [] // Add this new state
   });
-  const [favorites, setFavorites] = useState(new Set());
-
-  const toggleFavorite = photoId => {
-    setFavorites(prevFavorites => {
-      const newFavorites = new Set(prevFavorites);
-      if (newFavorites.has(photoId)) {
-        newFavorites.delete(photoId);
-      } else {
-        newFavorites.add(photoId);
-      }
-      return newFavorites;
-    });
-  };
 
   const setDisplayModal = (display) => {
     setModalState({ ...modalState, displayModal: display });
   };
 
   const setSelectedPhoto = (photo) => {
-    
-    
-   
-   console.log("selected",photo)
-    setModalState(prevState => ({ 
-      ...prevState, 
-      selectedPhoto: photo, 
-     similarPhotos: Object.values(photo.similarPhotos)
-    }));
-  };
+    const similarPhotos = photos.filter(p => 
+      p.location.city === photo.location.city && p.id !== photo.id
+    );
 
-  useEffect(() => {
-    if (modalState.selectedPhoto) {
-      setDisplayModal(true);
-    }
-  }, [modalState.selectedPhoto]);
-  
+    setModalState({ 
+      ...modalState, 
+      selectedPhoto: photo, 
+      similarPhotos: similarPhotos // Update the state with similar photos
+    });
+  };
 
   return (
     <div className="App">
       <HomeRoute
+        favoriteCount={5}
         photoData={photos}
         topicData={topics}
         setDisplayModal={setDisplayModal}
         setSelectedPhoto={setSelectedPhoto}
-        favorites={favorites}
-        toggleFavorite={toggleFavorite}
       />
       {modalState.displayModal && (
         <PhotoDetailsModal
           setDisplayModal={setDisplayModal}
           selectedPhoto={modalState.selectedPhoto}
           similarPhotos={modalState.similarPhotos} // Pass similar photos to the modal
-          setSelectedPhoto={setSelectedPhoto}
-          favorites={favorites}
-          toggleFavorite={toggleFavorite}
         />
       )}
     </div>
