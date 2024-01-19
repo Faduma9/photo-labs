@@ -1,80 +1,34 @@
 import React from "react";
+
+// Importing styles for the photo list
 import "../styles/PhotoList.scss";
 import PhotoListItem from "./PhotoListItem";
-const sampleDataForPhotoList = [
-  {
-    id: "1",
-    location: {
-      city: "Montreal",
-      country: "Canada",
-    },
-    urls: {
-      full: `${process.env.PUBLIC_URL}/Image-1-Full.jpeg`,
-      regular: `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
-    },
-    user: {
-      id: "1",
-      username: "exampleuser",
-      name: "Joe Example",
-      profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-    },
-  },
-  {
-    id: "2",
-    location: {
-      city: "Toronto",
-      country: "Canada",
-    },
-    urls: {
-      full: `${process.env.PUBLIC_URL}/Image-2-Full.jpeg`,
-      regular: `${process.env.PUBLIC_URL}/Image-2-Regular.jpeg`,
-    },
-    user: {
-      id: "2",
-      username: "exampleuser",
-      name: "Joe Example",
-      profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-    },
-  },
-  {
-    id: "3",
-    location: {
-      city: "Ottawa",
-      country: "Canada",
-    },
-    urls: {
-      full: `${process.env.PUBLIC_URL}/Image-3-Full.jpeg`,
-      regular: `${process.env.PUBLIC_URL}/Image-3-Regular.jpeg`,
-    },
-    user: {
-      id: "3",
-      username: "exampleuser",
-      name: "Joe Example",
-      profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
-    },
-  },
-];
 
-
-const PhotoList = ({ photoData, toggleFavorite, favorites, setDisplayModal,setSelectedPhoto }) => {
+// PhotoList component for displaying a list of photos
+const PhotoList = ({ photoData, toggleFavorite, favorites, setDisplayModal, setSelectedPhoto }) => {
   return (
+    // Rendering the photo list as an unordered list
     <ul className="photo-list">
-    {photoData.map(photo => (
-      <li key={photo.id} className="photo-list__item">
-        <PhotoListItem
-          id={photo.id}
-          location={photo.location}
-          imageSource={photo.urls.regular}
-          username={photo.user.username}
-          profile={photo.user.profile}
-          isFavorited={favorites.has(photo.id)}
-          onToggleFavorite={() => toggleFavorite(photo.id)}
-          setDisplayModal={setDisplayModal}
-          setSelectedPhoto={setSelectedPhoto}
-        />
-      </li>
-    ))}
-     </ul>
+      {/* Mapping over each photo in the photoData array */}
+      {photoData.map(photo => (
+        // Each photo is listed as a list item
+        <li key={photo.id} className="photo-list__item">
+          {/* PhotoListItem component for each photo, passing necessary props */}
+          <PhotoListItem
+            id={photo.id}
+            isFavorited={favorites.has(photo.id)} // Determines if the photo is favorited
+            onToggleFavorite={() => toggleFavorite(photo.id)} // Handles the favorite toggle
+            location={photo.location} // Location information of the photo
+            urls={photo.urls} // URLs for the photo
+            username={photo.user.username} // Username of the uploader
+            profile={photo.user.profile} // Profile picture of the uploader
+            similarPhotos={photo.similar_photos} // Array of similar photos
+            setDisplayModal={setDisplayModal} // Function to display the modal
+            setSelectedPhoto={setSelectedPhoto} // Function to set the selected photo
+          />
+        </li>
+      ))}
+    </ul>
   );
 };
 

@@ -1,18 +1,15 @@
 import React from "react";
 
+// Importing the styles specific to the TopicListItem component
 import "../styles/TopicListItem.scss";
 
-const sampleDataForTopicListItem = {
-  id: "1",
-  slug: "topic-1",
-  label: "Nature",
-};
-
-const TopicListItem = ({ label }) => {
+// TopicListItem component, designed to render individual topics as clickable items
+const TopicListItem = ({ label, onClick }) => {
+  // Render a button for each topic item
   return (
-    <div className="topic-list__item">
-      {label}
-    </div>
+    <button className="topic-list-item" onClick={onClick}>
+      {label} {/* Displaying the label of the topic */}
+    </button>
   );
 };
 
