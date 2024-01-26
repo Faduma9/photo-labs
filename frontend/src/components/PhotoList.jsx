@@ -12,7 +12,7 @@ const PhotoList = ({ photoData, toggleFavorite, favorites, setDisplayModal, setS
       {/* Mapping over each photo in the photoData array */}
       {photoData.map(photo => (
         // Each photo is listed as a list item
-        <li key={photo.id} className="photo-list__item">
+        <li key={photo.id}>
           {/* PhotoListItem component for each photo, passing necessary props */}
           <PhotoListItem
             id={photo.id}
